@@ -4,12 +4,12 @@ import Svg, { Path } from 'react-native-svg';
 
 import { StatusRow } from '@/components/status-row';
 import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
 import { Button } from '@/components/ui/button';
+import { GradientBackground } from '@/components/ui/gradient-background';
 import { Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
 
-const INK = '#8E4EC6';
+const INK = '#5EEAD4';
 
 type Point = { x: number; y: number };
 
@@ -45,7 +45,7 @@ export default function PenTestScreen() {
   };
 
   return (
-    <ThemedView style={styles.fill}>
+    <GradientBackground>
       <View
         style={[styles.pad, { borderColor: theme.backgroundSelected }]}
         onStartShouldSetResponder={() => true}
@@ -73,7 +73,7 @@ export default function PenTestScreen() {
         )}
       </View>
 
-      <ThemedView style={styles.panel}>
+      <View style={styles.panel}>
         <StatusRow
           label="Lines drawn"
           value={String(strokes.length)}
@@ -89,8 +89,8 @@ export default function PenTestScreen() {
           should appear when drawing with Apple Pencil.
         </ThemedText>
         <Button title="Clear" variant="tinted" color={INK} onPress={clear} />
-      </ThemedView>
-    </ThemedView>
+      </View>
+    </GradientBackground>
   );
 }
 

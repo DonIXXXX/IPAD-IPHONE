@@ -1,3 +1,4 @@
+import { LinearGradient } from 'expo-linear-gradient';
 import { Pressable, StyleSheet, Text, type PressableProps } from 'react-native';
 
 import { Spacing } from '@/constants/theme';
@@ -8,7 +9,7 @@ type ButtonProps = Omit<PressableProps, 'children' | 'style'> & {
   variant?: 'filled' | 'tinted';
 };
 
-export function Button({ title, color = '#208AEF', variant = 'filled', disabled, ...rest }: ButtonProps) {
+export function Button({ title, color = '#14B8A6', variant = 'filled', disabled, ...rest }: ButtonProps) {
   const filled = variant === 'filled';
   return (
     <Pressable
@@ -16,11 +17,18 @@ export function Button({ title, color = '#208AEF', variant = 'filled', disabled,
       disabled={disabled}
       style={({ pressed }) => [
         styles.button,
-        { backgroundColor: filled ? color : `${color}22` },
+        filled ? { backgroundColor: color } : styles.tinted,
         (pressed || disabled) && styles.dimmed,
       ]}
       {...rest}>
-      <Text style={[styles.title, { color: filled ? '#ffffff' : color }]}>{title}</Text>
+      {filled && (
+        <LinearGradient
+          colors={['rgba(255, 255, 255, 0.35)', 'rgba(255, 255, 255, 0)']}
+          style={styles.shine}
+          pointerEvents="none"
+        />
+      )}
+      <Text style={styles.title}>{title}</Text>
     </Pressable>
   );
 }
@@ -29,10 +37,24 @@ const styles = StyleSheet.create({
   button: {
     paddingVertical: Spacing.two + Spacing.one,
     paddingHorizontal: Spacing.three,
-    borderRadius: Spacing.three,
+    borderRadius: Spacing.five,
     alignItems: 'center',
+    overflow: 'hidden',
+    borderWidth: StyleSheet.hairlineWidth * 2,
+    borderColor: 'rgba(255, 255, 255, 0.3)',
+  },
+  tinted: {
+    backgroundColor: 'rgba(255, 255, 255, 0.14)',
+  },
+  shine: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    height: '50%',
   },
   title: {
+    color: '#ffffff',
     fontSize: 16,
     fontWeight: 600,
   },

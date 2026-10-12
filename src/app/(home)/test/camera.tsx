@@ -4,8 +4,8 @@ import { Linking, StyleSheet, View } from 'react-native';
 
 import { StatusRow } from '@/components/status-row';
 import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
 import { Button } from '@/components/ui/button';
+import { GradientBackground } from '@/components/ui/gradient-background';
 import { Spacing } from '@/constants/theme';
 
 type CameraResult = 'waiting' | 'working' | 'failed';
@@ -19,12 +19,12 @@ export default function CameraTestScreen() {
   const setResult = (result: CameraResult) => setResults((prev) => ({ ...prev, [facing]: result }));
 
   if (!permission) {
-    return <ThemedView style={styles.fill} />;
+    return <GradientBackground />;
   }
 
   if (!permission.granted) {
     return (
-      <ThemedView style={[styles.fill, styles.centered]}>
+      <GradientBackground style={styles.centered}>
         <ThemedText style={styles.center}>To test the camera, this app needs permission to use it.</ThemedText>
         {permission.canAskAgain ? (
           <Button title="Allow camera" onPress={requestPermission} />
@@ -36,12 +36,12 @@ export default function CameraTestScreen() {
             <Button title="Open Settings" onPress={() => Linking.openSettings()} />
           </>
         )}
-      </ThemedView>
+      </GradientBackground>
     );
   }
 
   return (
-    <ThemedView style={styles.fill}>
+    <GradientBackground>
       <CameraView
         key={facing}
         style={styles.fill}
@@ -55,7 +55,7 @@ export default function CameraTestScreen() {
           setResult('failed');
         }}
       />
-      <ThemedView style={styles.panel}>
+      <View style={styles.panel}>
         <StatusRow label="Back camera" value={label(results.back)} status={status(results.back)} />
         <StatusRow label="Front camera" value={label(results.front)} status={status(results.front)} />
         {error && (
@@ -72,8 +72,8 @@ export default function CameraTestScreen() {
             onPress={() => setFacing((f) => (f === 'back' ? 'front' : 'back'))}
           />
         </View>
-      </ThemedView>
-    </ThemedView>
+      </View>
+    </GradientBackground>
   );
 }
 

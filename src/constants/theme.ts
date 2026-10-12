@@ -7,22 +7,28 @@ import '@/global.css';
 
 import { Platform } from 'react-native';
 
-export const Colors = {
-  light: {
-    text: '#000000',
-    background: '#ffffff',
-    backgroundElement: '#F0F0F3',
-    backgroundSelected: '#E0E1E6',
-    textSecondary: '#60646C',
-  },
-  dark: {
-    text: '#ffffff',
-    background: '#000000',
-    backgroundElement: '#212225',
-    backgroundSelected: '#2E3135',
-    textSecondary: '#B0B4BA',
-  },
+/** The app always uses the ocean-teal glass look, in both light and dark mode. */
+const Ocean = {
+  text: '#ffffff',
+  background: '#023E4A',
+  backgroundElement: 'rgba(255, 255, 255, 0.10)',
+  backgroundSelected: 'rgba(255, 255, 255, 0.22)',
+  textSecondary: 'rgba(255, 255, 255, 0.72)',
 } as const;
+
+export const Colors = {
+  light: Ocean,
+  dark: Ocean,
+} as const;
+
+/** Background gradient, top-left to bottom-right. */
+export const BackgroundGradient = ['#023E4A', '#04566B', '#0B5394'] as const;
+
+/** Frosted-glass card styling. */
+export const Glass = {
+  border: 'rgba(255, 255, 255, 0.20)',
+  shine: ['rgba(255, 255, 255, 0.22)', 'rgba(255, 255, 255, 0)'] as const,
+};
 
 export type ThemeColor = keyof typeof Colors.light & keyof typeof Colors.dark;
 
@@ -62,4 +68,6 @@ export const Spacing = {
 } as const;
 
 export const BottomTabInset = Platform.select({ ios: 50, android: 80 }) ?? 0;
+/** On web the tab bar floats over the top of the page. */
+export const WebTabBarInset = Platform.OS === 'web' ? 72 : 0;
 export const MaxContentWidth = 800;

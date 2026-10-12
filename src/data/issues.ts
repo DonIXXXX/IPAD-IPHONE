@@ -6,7 +6,7 @@
 
 import type { AndroidSymbol, SFSymbol } from 'expo-symbols';
 
-export type LiveCheck = 'wifi' | 'performance';
+export type LiveCheck = 'wifi' | 'performance' | 'battery';
 export type DeviceTest = 'camera' | 'pen';
 
 export type Step = {
@@ -213,6 +213,168 @@ export const ISSUES: Issue[] = [
       {
         title: 'Limit background activity',
         detail: 'Settings > General > Background App Refresh — turn it off for apps that don\'t need it.',
+      },
+    ],
+  },
+  {
+    id: 'bluetooth',
+    title: 'Bluetooth & AirPods',
+    subtitle: 'Won\'t connect, drops out or audio cuts',
+    icon: { ios: 'airpodspro', android: 'bluetooth' },
+    color: '#0091FF',
+    steps: [
+      {
+        title: 'Check Bluetooth is on',
+        detail: 'Open Control Center and make sure the Bluetooth icon is blue. If it is white, tap it on.',
+      },
+      {
+        title: 'Charge the accessory',
+        detail: 'Put AirPods in their case and charge for 15 minutes. For other headphones, keyboards or speakers, charge or replace the batteries.',
+      },
+      {
+        title: 'Bring it closer',
+        detail: 'Keep the accessory within a few metres of your device, away from microwaves, Wi-Fi routers and thick walls.',
+      },
+      {
+        title: 'Turn Bluetooth off and on',
+        detail: 'Settings > Bluetooth — switch it off, wait 10 seconds, then switch it on again.',
+      },
+      {
+        title: 'Forget the device and pair again',
+        detail: 'Settings > Bluetooth > tap (i) next to the accessory > Forget This Device. Then put the accessory in pairing mode (AirPods: open the case near your device and hold the button on the back) and connect again.',
+      },
+      {
+        title: 'Disconnect it from other devices',
+        detail: 'Headphones often reconnect to a nearby Mac, iPad or phone. Turn Bluetooth off on other devices while you test.',
+      },
+      {
+        title: 'Restart the device',
+        detail: 'Turn your iPhone or iPad off and on, then try connecting again.',
+      },
+      {
+        title: 'Reset the accessory',
+        detail: 'AirPods: put them in the case, open the lid and hold the setup button for about 15 seconds until the light flashes amber, then white. For other accessories, check the maker\'s reset instructions.',
+      },
+    ],
+  },
+  {
+    id: 'battery',
+    title: 'Battery & charging',
+    subtitle: 'Drains fast, won\'t charge or charges slowly',
+    icon: { ios: 'battery.50percent', android: 'battery_charging_full' },
+    color: '#46A758',
+    check: 'battery',
+    steps: [
+      {
+        title: 'Check the live readings above',
+        detail: 'Plug in your charger and watch the status change to "Charging". If it never does, the cable, adapter or port is the likely problem.',
+      },
+      {
+        title: 'Try another cable and adapter',
+        detail: 'Cables wear out, especially near the ends. Use an Apple or MFi-certified cable and a wall adapter rather than a computer USB port.',
+      },
+      {
+        title: 'Clean the charging port',
+        detail: 'Lint often builds up in the port. Look inside with a torch and gently remove debris with a wooden toothpick. Never use metal or liquid.',
+      },
+      {
+        title: 'Check what is using battery',
+        detail: 'Settings > Battery shows which apps used the most battery. Close or limit apps that use a lot in the background.',
+      },
+      {
+        title: 'Check battery health',
+        detail: 'iPhone: Settings > Battery > Battery Health & Charging. Below 80% maximum capacity means the battery is worn and may need replacing.',
+      },
+      {
+        title: 'Reduce battery use',
+        detail: 'Lower screen brightness, turn on Low Power Mode when needed, and turn off Background App Refresh for apps that don\'t need it.',
+      },
+      {
+        title: 'Avoid heat',
+        detail: 'Charging pauses when the device is hot. Remove thick cases while charging and keep it out of direct sunlight.',
+      },
+      {
+        title: 'Restart and update',
+        detail: 'Restart the device, then check Settings > General > Software Update.',
+      },
+    ],
+  },
+  {
+    id: 'sound',
+    title: 'Sound & speaker',
+    subtitle: 'No sound, low volume or muffled calls',
+    icon: { ios: 'speaker.wave.2', android: 'volume_up' },
+    color: '#D6409F',
+    steps: [
+      {
+        title: 'Turn up the volume',
+        detail: 'Press the volume up button, or drag the volume slider in Control Center. Make sure you are adjusting media volume, not just the ringer.',
+      },
+      {
+        title: 'Check Silent Mode',
+        detail: 'iPhone: check the Ring/Silent switch or Action button. iPad: open Control Center and make sure the bell icon is not crossed out.',
+      },
+      {
+        title: 'Disconnect Bluetooth audio',
+        detail: 'Sound may be going to headphones or a speaker. Open Control Center, tap the AirPlay icon on the music card and choose iPhone or iPad.',
+      },
+      {
+        title: 'Turn off Do Not Disturb / Focus',
+        detail: 'Open Control Center and tap Focus to turn it off. Focus modes silence calls and notifications.',
+      },
+      {
+        title: 'Clean the speaker and microphone',
+        detail: 'Gently brush the speaker and microphone holes with a soft, dry brush. Remove any case or screen protector that covers them.',
+      },
+      {
+        title: 'Test the microphone',
+        detail: 'Record a short Voice Memo, then play it back. If you can\'t hear yourself, the microphone or speaker may be faulty.',
+      },
+      {
+        title: 'Restart and update',
+        detail: 'Restart the device, then check Settings > General > Software Update.',
+      },
+    ],
+  },
+  {
+    id: 'apps',
+    title: 'Apps & App Store',
+    subtitle: 'Apps crash or won\'t download or update',
+    icon: { ios: 'app.badge', android: 'apps' },
+    color: '#3E63DD',
+    check: 'performance',
+    steps: [
+      {
+        title: 'Close and reopen the app',
+        detail: 'Swipe up from the bottom and pause, then swipe the app away. Open it again.',
+      },
+      {
+        title: 'Update the app',
+        detail: 'Open the App Store, tap your profile picture and pull down to refresh. Tap Update next to the app.',
+      },
+      {
+        title: 'Check storage',
+        detail: 'Apps can\'t download or update when storage is full. See the live reading above and free up space in Settings > General > Storage.',
+      },
+      {
+        title: 'Check your internet',
+        detail: 'Downloads need a working connection. Use the Wi-Fi guide if pages won\'t load.',
+      },
+      {
+        title: 'Pause and resume a stuck download',
+        detail: 'Press and hold the app icon on the Home Screen and choose Pause Download, then Resume Download.',
+      },
+      {
+        title: 'Sign out of the App Store and back in',
+        detail: 'App Store > profile picture > scroll down > Sign Out. Then sign in again with your Apple Account.',
+      },
+      {
+        title: 'Delete and reinstall the app',
+        detail: 'Press and hold the app > Remove App > Delete App, then download it again. Note: this may remove data that the app does not back up.',
+      },
+      {
+        title: 'Check restrictions',
+        detail: 'Settings > Screen Time > Content & Privacy Restrictions > iTunes & App Store Purchases — make sure installing apps is allowed. Work or school devices may block downloads.',
       },
     ],
   },
